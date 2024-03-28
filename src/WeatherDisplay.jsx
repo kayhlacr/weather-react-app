@@ -1,10 +1,14 @@
-const WeatherDisplay = ({ forecast }) => {
+const WeatherDisplay = ({ data }) => {
+  if (!data || !data.forecast || !data.forecast.forecastday) {
+    return <div>No forecast data available.</div>;
+  }
+
   return (
     <div>
-      {forecast.map((day, index) => (
+      {data.forecast.forecastday.map((day, index) => (
         <div key={index}>
           <h2>
-            {day.date}: Max {day.maxtemp_f}°F, Min {day.mintemp_f}°F
+            {day.date}: Max {day.day.maxtemp_f}°F, Min {day.day.mintemp_f}°F
           </h2>
         </div>
       ))}

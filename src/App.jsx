@@ -3,7 +3,6 @@ import WeatherForm from "./WeatherForm";
 import WeatherDisplay from "./WeatherDisplay";
 
 const App = () => {
-  const [forecast, setForecast] = useState([]);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   const [userLocation, setUserLocation] = useState("96746");
@@ -14,10 +13,9 @@ const App = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
+    fetchWeather().then(() => {
       setLoading(false);
-      setForecast(data.forecast.forecastday);
-    }, 1000);
+    });
   };
 
   const fetchWeather = () => {
@@ -34,7 +32,7 @@ const App = () => {
 
   useEffect(() => {
     fetchWeather();
-  }, [userLocation]);
+  }, []);
   console.log(data);
   console.log(userLocation);
 
@@ -49,7 +47,7 @@ const App = () => {
         userLocation={userLocation}
       />
       {loading && <div>Loading...</div>}
-      <WeatherDisplay forecast={forecast} />
+      <WeatherDisplay data={data} />
     </div>
   );
 };
