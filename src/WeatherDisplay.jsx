@@ -1,5 +1,5 @@
 const WeatherDisplay = ({ data }) => {
-  if (!data || !data.forecast || !data.forecast.forecastday) {
+  if (!data?.forecast?.forecastday) {
     return <div>No forecast data available.</div>;
   }
 
