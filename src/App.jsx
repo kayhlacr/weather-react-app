@@ -2,24 +2,25 @@ import { useEffect, useState } from "react";
 import WeatherForm from "./WeatherForm";
 import WeatherDisplay from "./WeatherDisplay";
 
+const apiKey = import.meta.env.VITE_API_KEY
+
+const API_ROOT = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&days=5&aqi=no&alerts=no`;
+
 const App = () => {
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState({});
   const [userLocation, setUserLocation] = useState("96746");
 
-  const apiKey = "df5235b07d874835b4234937242803";
-  const api = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${userLocation}&days=5&aqi=no&alerts=no`;
+  const api = `${API_ROOT}&q=${userLocation}`;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-    fetchWeather().then(() => {
-      setLoading(false);
-    });
+    fetchWeather();
   };
 
   const fetchWeather = () => {
-    return fetch(api)
+    setLoading(true);
+    fetch(api)
       .then((res) => res.json())
       .then((d) => {
         console.log("Fetched weather data:", d);
@@ -27,11 +28,26 @@ const App = () => {
       })
       .catch((error) => {
         console.error("Error fetching weather data:", error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
+  const fetchWeatherAsync = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(api)
+      const data = await res.json()
+      setData(data);
+    } catch (error) {
+      console.error("Error fetching weather data:", error);
+    }
+    setLoading(false);
+  };
+
   useEffect(() => {
-    fetchWeather();
+    fetchWeatherAsync();
   }, []);
   console.log(data);
   console.log(userLocation);
@@ -46,8 +62,9 @@ const App = () => {
         setUserLocation={setUserLocation}
         userLocation={userLocation}
       />
-      {loading && <div>Loading...</div>}
-      <WeatherDisplay data={data} />
+      {loading ? <div>Loading...</div> : (
+        <WeatherDisplay data={data} />
+      )}
     </div>
   );
 };
