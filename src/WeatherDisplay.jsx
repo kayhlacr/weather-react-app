@@ -4,11 +4,12 @@ const WeatherDisplay = ({ data }) => {
   }
 
   return (
-    <div>
+    <div className="weather-display">
       {data.forecast.forecastday.map((day, index) => (
-        <div key={index}>
+        <div className="weather-display-day" key={index}>
           <h2>
-            {day.date}: Max {day.day.maxtemp_f}°F, Min {day.day.mintemp_f}°F
+            <span className="date">{day.date}</span> Max {day.day.maxtemp_f}°F,
+            Min {day.day.mintemp_f}°F
           </h2>
         </div>
       ))}

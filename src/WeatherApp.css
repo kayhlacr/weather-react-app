@@ -1,0 +1,63 @@
+.weather-app {
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.weather-form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.weather-form label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.weather-form input[type="text"] {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+}
+
+.weather-form button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.weather-form button:hover {
+  background-color: #0056b3;
+}
+
+.weather-display {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.weather-display-day {
+  background-color: #d9afd9;
+  background-image: linear-gradient(0deg, #d9afd9 0%, #97d9e1 100%);
+  border-radius: 5px;
+  padding: 15px;
+  margin: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.weather-display-day h2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.weather-display-day .date {
+  color: rgb(5, 3, 3);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}

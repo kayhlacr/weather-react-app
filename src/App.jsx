@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./WeatherApp.css";
 import WeatherForm from "./WeatherForm";
 import WeatherDisplay from "./WeatherDisplay";
 
@@ -53,7 +54,7 @@ const App = () => {
   console.log(userLocation);
 
   return (
-    <div>
+    <div className="weather-app">
       <h2>Weather Forecast</h2>
       <WeatherForm
         handleSubmit={handleSubmit}

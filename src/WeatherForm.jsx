@@ -5,7 +5,7 @@ const WeatherForm = ({
   loading,
 }) => {
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="weather-form" onSubmit={handleSubmit}>
       <label>Enter your location or Zip Code:</label>
       <input
         type="text"
